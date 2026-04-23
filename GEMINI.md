@@ -1,5 +1,3 @@
-IMPORTANT: Ensure you’ve thoroughly reviewed the [AGENTS.md](AGENTS.md) file before beginning any work.
-
 <!-- OMA:START — managed by oh-my-agent. Do not edit this block manually. -->
 
 # oh-my-agent
@@ -10,7 +8,7 @@ IMPORTANT: Ensure you’ve thoroughly reviewed the [AGENTS.md](AGENTS.md) file b
 - **Response language**: Follows `language` in `.agents/oma-config.yaml`
 - **Skills**: `.agents/skills/` (domain specialists)
 - **Workflows**: `.agents/workflows/` (multi-step orchestration)
-- **Subagents**: Same-vendor native dispatch via Claude Code Agent tool with `.claude/agents/{name}.md`; cross-vendor fallback via `oma agent:spawn`
+- **Subagents**: Same-vendor native dispatch via `.gemini/agents/{name}.md`; cross-vendor or unsupported cases fall back to `oma agent:spawn {agent} {prompt} {sessionId}`
 
 ## Per-Agent Dispatch
 
@@ -37,7 +35,7 @@ To execute: read and follow `.agents/workflows/{name}.md` step by step.
 
 ## Auto-Detection
 
-Hooks: `UserPromptSubmit` (keyword detection), `PreToolUse`, `Stop` (persistent mode)
+Hooks: `BeforeAgent` (keyword detection), `BeforeTool`, `AfterAgent` (persistent mode)
 Keywords defined in `.agents/hooks/core/triggers.json` (multi-language).
 Persistent workflows (orchestrate, ultrawork, work) block termination until complete.
 Deactivate: say "workflow done".
